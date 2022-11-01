@@ -1,0 +1,20 @@
+$fw-bold: 700;
+$fw-light: 300;
+$fw-medium: 500;
+$fw-regular: 300;
+
+// $black: #222;
+// $black-light: #333;
+// $white: #fff;
+// $gray: #555;
+// $blue-light: #D9ECF2;
+
+$black: var(--black);
+$black-light: var(--black-light);
+$white: var(--white);
+$gray: var(--gray);
+$blue-light: var(--blue-light);
+
+
+$br: 20px;
+$tr: 0.5s ease-in-out;
