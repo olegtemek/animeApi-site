@@ -55,7 +55,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  document.title += ' ' + to.meta.title
+  document.title = 'AnimeApi | ' + to.meta.title
   if (to.meta.middleware == "guest") {
     if (window.Laravel.isLoggedin && to.name == 'login') {
       next({ name: 'profile' })

@@ -13,9 +13,12 @@
           <p><span>Status:</span> {{ anime.status }}</p>
         </div>
         <div class="anime__card-right-row">
-          <router-link :to="`/see/${$props.animeId}`" @click="closeModal"
-            >See more and add favorite list</router-link
-          >
+          <MyButton
+            @click="closeModal"
+            :type="'link'"
+            :link="`/see/${$props.animeId}`"
+            :title="'See more and add favorite list'"
+          />
         </div>
       </div>
     </div>
@@ -30,7 +33,6 @@ import { ref } from "@vue/reactivity";
 import { computed, onMounted } from "@vue/runtime-core";
 import { onClickOutside } from "@vueuse/core";
 import { useStore } from "vuex";
-import LoadingComponent from "@/views/frontend/components/LoadingComponent.vue";
 const props = defineProps({
   animeId: [String],
 });
@@ -126,13 +128,6 @@ const anime = computed(() => {
         span {
           font-weight: $fw-bold;
         }
-      }
-      > a,
-      button {
-        color: inherit;
-        padding: 10px 20px;
-        border-radius: $br;
-        background-color: $blue-light;
       }
     }
   }

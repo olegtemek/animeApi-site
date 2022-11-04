@@ -20,9 +20,9 @@
           <p><span>Status: </span>{{anime.status}}</p>
           <p>
             <a :href="anime.episodesList[anime.episodesList.length - 1].episodeUrl" target="_blank">Show first episode</a>
-            <button @click="animeAdd" v-if="animeStatus == 200">Add to your favorite list</button>
-            <router-link :to="{name:'login'}" v-else-if="animeStatus == 300">Add to your favorite list</router-link>
-            <button @click="animeRemove" v-else-if="animeStatus == 400">Remove from favorite list</button>
+            <MyButton @click="animeAdd" v-if="animeStatus == 200" :title="'Add to your favorite list'" :type="'button'"/>
+            <MyButton :link="{name:'login'}" v-else-if="animeStatus == 300" :title="'Add to your favorite list'" :type="'link'"/>
+            <MyButton @click="animeRemove" v-else-if="animeStatus == 400" :title="'Remove from favorite list'" :type="'button'"/>
           </p>
           
         </div>
@@ -38,7 +38,7 @@
 import { computed, onMounted, ref } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
-import LoadingComponent from "@/views/frontend/components/LoadingComponent.vue";
+
 const route = useRoute();
 const store = useStore();
 const id = ref(route.params.id);
@@ -93,7 +93,7 @@ const animeRemove = () => {
       max-height: 415px;
       object-fit: cover;
       @media (max-width: 1280px) {
-        width: 200px;
+        width: 400px;
       }
       @media (max-width: 414px) {
         width: 100%;

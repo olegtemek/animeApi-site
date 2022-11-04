@@ -46,8 +46,10 @@ export default {
       state.animes = animes
     },
     removeAnimesItem(state, id) {
-      let index = state.animes.findIndex(anime => anime.anime_id == id);
-      state.animes.splice(index, 1)
+      if (state.animes) {
+        let index = state.animes.findIndex(anime => anime.anime_id == id);
+        state.animes.splice(index, 1)
+      }
     }
   },
   getters: {

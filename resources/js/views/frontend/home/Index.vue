@@ -6,14 +6,12 @@
           <img src="@assets/img/hinata.png" alt="" />
           <div class="intro__text">
             <h1>AnimeList - add your favorite anime</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
-              asperiores amet illo consectetur repudiandae perspiciatis
-              praesentium exercitationem deserunt cumque adipisci iusto aut
-              veritatis voluptatum, fuga doloremque impedit deleniti officiis
-              beatae.
-            </p>
-            <a href="#">Go to my anime list</a>
+            <p>You can find anime and add to your favorite list</p>
+            <MyButton
+              :link="'/profile'"
+              :type="'link'"
+              :title="'Go to my anime list'"
+            />
           </div>
         </div>
       </div>

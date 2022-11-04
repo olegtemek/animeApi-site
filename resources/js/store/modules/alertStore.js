@@ -5,7 +5,7 @@ export default {
   mutations: {
     storeAlertMessage(state, message) {
       state.alert_message = message;
-    }
+    },
   },
   getters: {
     getAlertMessage(state) {

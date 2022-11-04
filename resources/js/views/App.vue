@@ -12,6 +12,7 @@
         :animeId="animeId"
       />
     </Teleport>
+    <AlertComponent v-if="alert_message" :alert_message="alert_message" />
   </div>
 </template>
 
@@ -19,6 +20,9 @@
 import HeaderComponent from "@/views/frontend/components/HeaderComponent.vue";
 import AnimeCard from "@/views/frontend/components/AnimeCard.vue";
 import { ref } from "@vue/reactivity";
+import { computed } from "@vue/runtime-core";
+import { useStore } from "vuex";
+const store = useStore();
 const animeId = ref(null);
 const openModal = (id) => {
   animeId.value = id;
@@ -26,6 +30,9 @@ const openModal = (id) => {
 const closeModal = () => {
   animeId.value = null;
 };
+const alert_message = computed(() => {
+  return store.getters.getAlertMessage;
+});
 </script>
 
 
