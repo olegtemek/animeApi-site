@@ -2,71 +2,60 @@ import axios from "axios"
 
 export default {
   state: {
-    animeList: null,
-    anime: null,
+    animeStatus: null,
+    animes: null,
   },
   actions: {
-    async search(ctx, text) {
-      if (text) {
-        ctx.commit('storeAnimeList', [{ message: 'Loading...' }])
-        let res = await axios.get(`https://gogoanime.consumet.org/search?keyw=${text}`)
-        if (res.status == 200) {
-          if (res.data.length != 0) {
-            ctx.commit('storeAnimeList', res.data.slice(0, 5))
-          } else {
-            ctx.commit('storeAnimeList', [{ message: 'Anime not found' }])
-          }
-        } else {
-          ctx.commit('storeAnimeList', [{ message: 'Server error, try later' }])
-        }
-      } else {
-        ctx.commit('storeAnimeList', null)
+    async animeAdd(ctx, data) {
+      let res = await axios.post('/api/anime-add', { id: data.id, title: data.title, image: data.image })
+      if (res.data.status == 200) {
+        ctx.commit('storeAnimeStatus', 400)
+        ctx.commit('storeAlertMessage', 'Anime was add to your favorite list')
       }
     },
-    async fetchAnime(ctx, id) {
-      ctx.commit('nullAnime', null)
-      let res = await axios.get(`https://gogoanime.consumet.org/anime-details/${id}`)
-      if (res.data != null) {
-        ctx.commit('storeAnime', res.data)
+    async animeCheck(ctx, data) {
+      let res = await axios.post('/api/anime-check', { id: data.id })
+      //if 300 == unauthorize
+      //if 400 == find anime with this user
+      // if 200 == user is auth and not in anime list
+      if (res.data.status) {
+        ctx.commit('storeAnimeStatus', res.data.status)
       }
     },
-    async fetchAnimePage(ctx, id) {
-      ctx.commit('nullAnimePage', null)
-      let res = await axios.get(`https://gogoanime.consumet.org/anime-details/${id}`)
-      if (res.data != null) {
-        ctx.commit('storeAnimePage', res.data)
-        console.log(res.data);
+    async animeRemove(ctx, data) {
+      let res = await axios.post('/api/anime-remove', { id: data.id })
+      if (res.status) {
+        ctx.commit('storeAnimeStatus', res.data.status)
+        ctx.commit('storeAlertMessage', 'Anime was removed from your favorite list')
+        ctx.commit('removeAnimesItem', data.id)
       }
     },
 
+    async fetchAnimesUser(ctx, data) {
+      let res = await axios.post('/api/get-animes')
+      if (res.data.status == 200) {
+        ctx.commit('storeAnimesUser', res.data.animes)
+      }
+    }
   },
   mutations: {
-    storeAnimeList(state, data) {
-      state.animeList = data
+    storeAnimeStatus(state, status) {
+      state.animeStatus = status
     },
-    storeAnime(state, data) {
-      state.anime = data
+    storeAnimesUser(state, animes) {
+      state.animes = animes
     },
-    nullAnime(state, data) {
-      state.anime = data
-    },
-    nullAnimePage(state, data) {
-      state.animePage = data
-    },
-    storeAnimePage(state, data) {
-      state.animePage = data
-    },
+    removeAnimesItem(state, id) {
+      let index = state.animes.findIndex(anime => anime.anime_id == id);
+      state.animes.splice(index, 1)
+    }
   },
   getters: {
-    getAnimeList(state) {
-      return state.animeList;
+    getAnimeStatus(state) {
+      return state.animeStatus;
     },
-    getAnime(state) {
-      return state.anime
-    },
-    getAnimePage(state) {
-      return state.animePage
-    },
-
+    getAnimesUser(state) {
+      return state.animes
+    }
   }
 }

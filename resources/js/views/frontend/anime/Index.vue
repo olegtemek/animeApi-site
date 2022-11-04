@@ -14,17 +14,15 @@
               <li v-for="genre of anime.genres" :key="genre">
                 {{genre}}
               </li>
-              <li v-for="genre of anime.genres" :key="genre">
-                {{genre}}
-              </li>
             </ul>
           </p>
           <p><span>TotalEpisodes: </span>{{anime.totalEpisodes}}</p>
           <p><span>Status: </span>{{anime.status}}</p>
           <p>
             <a :href="anime.episodesList[anime.episodesList.length - 1].episodeUrl" target="_blank">Show first episode</a>
-            <a href="#">Add to your favorite list</a>
-            <!-- <a href="#">Remove from favorite list</a> -->
+            <button @click="animeAdd" v-if="animeStatus == 200">Add to your favorite list</button>
+            <router-link :to="{name:'login'}" v-else-if="animeStatus == 300">Add to your favorite list</router-link>
+            <button @click="animeRemove" v-else-if="animeStatus == 400">Remove from favorite list</button>
           </p>
           
         </div>
@@ -37,7 +35,7 @@
 
 
 <script setup>
-import { computed, onMounted, ref, watch } from "@vue/runtime-core";
+import { computed, onMounted, ref } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import LoadingComponent from "@/views/frontend/components/LoadingComponent.vue";
@@ -47,10 +45,29 @@ const id = ref(route.params.id);
 
 onMounted(() => {
   store.dispatch("fetchAnimePage", id.value);
+  store.dispatch("animeCheck", { id: id.value });
 });
 const anime = computed(() => {
   return store.getters.getAnimePage;
 });
+
+const animeStatus = computed(() => {
+  return store.getters.getAnimeStatus;
+});
+
+const animeAdd = () => {
+  store.dispatch("animeAdd", {
+    id: id.value,
+    title: anime.value.animeTitle,
+    image: anime.value.animeImg,
+  });
+};
+
+const animeRemove = () => {
+  store.dispatch("animeRemove", {
+    id: id.value,
+  });
+};
 </script>
 
 <style lang="scss" scoped>
@@ -128,7 +145,9 @@ const anime = computed(() => {
         }
       }
 
-      a {
+      a,
+      button {
+        color: inherit;
         padding: 10px 20px;
         border-radius: $br;
         background-color: $blue-light;

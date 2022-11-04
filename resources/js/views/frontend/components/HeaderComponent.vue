@@ -6,7 +6,10 @@
         <HeaderSearchComponent @openModal="(id) => $emit('openModal', id)" />
         <div class="header__right">
           <ThemeComponent />
-          <button>Sign in</button>
+          <router-link :to="{ name: 'profile' }" v-if="authentificated"
+            >Profile</router-link
+          >
+          <router-link :to="{ name: 'login' }" v-else>Sign in</router-link>
         </div>
       </div>
     </div>
@@ -18,6 +21,9 @@
 <script setup>
 import HeaderSearchComponent from "@/views/frontend/components/HeaderSearchComponent.vue";
 import ThemeComponent from "@/views/frontend/components/ThemeComponent.vue";
+import { ref } from "@vue/reactivity";
+
+const authentificated = ref(window.Laravel.isLoggedin);
 </script>
 
 <style lang="scss" scoped>
@@ -33,7 +39,7 @@ import ThemeComponent from "@/views/frontend/components/ThemeComponent.vue";
     align-items: center;
     justify-content: space-between;
 
-    a {
+    > a {
       font-weight: $fw-bold;
       font-size: 32px;
       @media (max-width: 600px) {
@@ -47,7 +53,7 @@ import ThemeComponent from "@/views/frontend/components/ThemeComponent.vue";
   &__right {
     display: flex;
     align-items: center;
-    button {
+    a {
       &:last-child {
         margin-left: 20px;
         color: $white;

@@ -9,6 +9,20 @@
     <script src="http://localhost:8098"></script>
 </head>
 <body>
+    @if (Auth::check())
+    <script>
+        window.Laravel = {!!json_encode([
+            'isLoggedin' => true,
+            'user' => Auth::user()
+        ])!!}
+    </script>
+    @else
+        <script>
+            window.Laravel = {!!json_encode([
+                'isLoggedin' => false
+            ])!!}
+        </script>
+    @endif
     @yield('content')
 </body>
 </html>

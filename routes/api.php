@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\api\AnimeController;
+use App\Http\Controllers\api\AuthController;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get('/get-user', function () {
+        return response()->json([
+            'status' => 200,
+            'user' => auth()->user()
+        ]);
+    });
+    Route::post('/anime-add', [AnimeController::class, 'store']);
+    Route::post('/anime-remove', [AnimeController::class, 'remove']);
+    Route::post('/get-animes', [AnimeController::class, 'get']);
 });
+
+Route::post('login', [AuthController::class, 'login']);
+Route::post('register', [AuthController::class, 'register']);
+Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::post('/anime-check', [AnimeController::class, 'check']);

@@ -1,9 +1,16 @@
 <template>
   <div>
-    <HeaderComponent @openModal="(id) => openModal(id)" />
+    <HeaderComponent
+      @openModal="(id) => openModal(id)"
+      v-if="$route.name != 'login' && $route.name != 'register'"
+    />
     <router-view :key="$route.path"></router-view>
     <Teleport to="body">
-      <AnimeCard v-if="animeId" @closeModal="closeModal" :animeId="animeId" />
+      <AnimeCard
+        v-if="animeId && $route.name != 'login'"
+        @closeModal="closeModal"
+        :animeId="animeId"
+      />
     </Teleport>
   </div>
 </template>

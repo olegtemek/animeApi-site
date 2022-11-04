@@ -14,9 +14,8 @@
         </div>
         <div class="anime__card-right-row">
           <router-link :to="`/see/${$props.animeId}`" @click="closeModal"
-            >See more</router-link
+            >See more and add favorite list</router-link
           >
-          <a href="#">Add to favorite</a>
         </div>
       </div>
     </div>
@@ -128,7 +127,9 @@ const anime = computed(() => {
           font-weight: $fw-bold;
         }
       }
-      > a {
+      > a,
+      button {
+        color: inherit;
         padding: 10px 20px;
         border-radius: $br;
         background-color: $blue-light;
