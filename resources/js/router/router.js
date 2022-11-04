@@ -29,15 +29,15 @@ const routes = [
       middleware: "guest",
     }
   },
-  {
-    path: '/register',
-    component: () => import('@/views/frontend/auth/Register.vue'),
-    name: 'register',
-    meta: {
-      title: 'Register',
-      middleware: "guest",
-    }
-  },
+  // {
+  //   path: '/register',
+  //   component: () => import('@/views/frontend/auth/Register.vue'),
+  //   name: 'register',
+  //   meta: {
+  //     title: 'Register',
+  //     middleware: "guest",
+  //   }
+  // },
   {
     path: '/profile',
     component: () => import('@/views/frontend/profile/Index.vue'),

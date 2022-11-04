@@ -21,10 +21,10 @@
                 @keyup.enter="login"
               />
             </label>
-            <p>
+            <!-- <p>
               Don't have account?
               <router-link :to="{ name: 'register' }">Registration</router-link>
-            </p>
+            </p> -->
             <button @click="login">Login</button>
           </div>
         </div>

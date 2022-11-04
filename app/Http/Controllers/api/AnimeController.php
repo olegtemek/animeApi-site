@@ -34,14 +34,20 @@ class AnimeController extends Controller
         ];
         $user_id = auth()->user()->id;
 
-        Anime::create([
-            'user_id' => $user_id,
-            'anime_title' => $credentials['title'],
-            'anime_id' => $credentials['id'],
-            'anime_image' => $credentials['image'],
-        ]);
+        $anime_count = Anime::all()->count();
+        if ($anime_count <= 3) {
+            Anime::create([
+                'user_id' => $user_id,
+                'anime_title' => $credentials['title'],
+                'anime_id' => $credentials['id'],
+                'anime_image' => $credentials['image'],
+            ]);
+            return response()->json([
+                'status' => 200,
+            ]);
+        }
         return response()->json([
-            'status' => 200,
+            'status' => 204,
         ]);
     }
     public function remove(Request $req)

@@ -12,6 +12,9 @@ export default {
         ctx.commit('storeAnimeStatus', 400)
         ctx.commit('storeAlertMessage', 'Anime was add to your favorite list')
       }
+      else if (res.data.status == 204) {
+        ctx.commit('storeAlertMessage', 'Cannot add to favorite list, your limit 4 titles in favorite list')
+      }
     },
     async animeCheck(ctx, data) {
       let res = await axios.post('/api/anime-check', { id: data.id })
