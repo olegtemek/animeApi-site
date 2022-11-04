@@ -6,3 +6,14 @@ Stack:
   SCSS
   VUE 3 (VUEX,ROUTER,VUEUSE)
   LARAVEL API
+
+
+
+
+For example go to my url
+
+data for auth =
+  Login: example@example.example
+  Password: example
+
+This user can add only 4 titles for favorite list and delete them
