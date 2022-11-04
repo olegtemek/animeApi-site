@@ -14,7 +14,7 @@ export default {
 const props = defineProps({
   title: String,
   type: String,
-  link: String,
+  link: [String, Object],
 });
 </script>
 
