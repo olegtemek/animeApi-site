@@ -42,9 +42,6 @@ For example go to (https://animeapi.olegtemek.kz)
 
 ---
 
-
----
-
 ➡️ [more projects...](https://github.com/olegtemek)
 
 ---
