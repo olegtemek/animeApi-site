@@ -19,7 +19,6 @@
   <img align="left" alt="HTML5" width="30px" src="https://cdn.svgporn.com/logos/html-5.svg" />
   <img align="left" alt="CSS3" width="30px" src="https://cdn.svgporn.com/logos/css-3.svg" />
   <img align="left" alt="javascript" width="30px" src="https://cdn.svgporn.com/logos/javascript.svg" />
-  <img align="left" alt="javascript" width="30px" src="https://cdn.svgporn.com/logos/javascript.svg" />
   <img align="left" alt="Vue.js" width="30px" src="https://cdn.svgporn.com/logos/vue.svg">
   <img alt="Laravel" align="left" src="https://cdn.svgporn.com/logos/laravel.svg" width="30px">
   
