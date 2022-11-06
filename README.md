@@ -35,8 +35,8 @@ Anime information obtained thanks to [GoGoAnime API](https://github.com/riimuru/
 For example go to (https://animeapi.olegtemek.kz)
 
 * Data for auth =
-* Login: example@example.example
-* Password: example
+* Login: preview@preview.preview
+* Password: preview
 
 ⚠️This user can add only 4 titles for favorite list and delete them⚠️
 
