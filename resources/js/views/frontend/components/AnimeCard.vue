@@ -63,7 +63,7 @@ const anime = computed(() => {
   top: 0;
   left: 0;
   background-color: rgba(black, 0.5);
-  z-index: 2;
+  z-index: 4;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -71,6 +71,8 @@ const anime = computed(() => {
   &-wrapper {
     position: relative;
     width: 700px;
+    overflow-y: scroll;
+    height: 90%;
     background-color: $black;
     color: $white;
     padding: 40px;

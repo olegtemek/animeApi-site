@@ -34,7 +34,7 @@ Anime information obtained thanks to [GoGoAnime API](https://github.com/riimuru/
 
 For example go to (https://animeapi.olegtemek.kz)
 
-* Data for auth =
+* Data for auth
 * Login: preview@preview.preview
 * Password: preview
 
